@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description:
+  Micah Shallom Bawa
+  Automating Infrastructure Build With CircleCI
+
+Parameters:
+  VPCCIDR:
+    Type: String
+    Description: Virtual Private Cloud containing cidr block for application
+    Default: 10.0.0.0/16
+  ProjectName:
+    Type: String
+    Description: Project Name for infrastructures
+  PublicSubnetCIDR:
+    Type: String
+    Default: 10.0.1.0/16
+
+Resources:
+  myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: !Sub ${ProjectName} VPC CIDR
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnetCIDR
+      VpcId: !Ref myVPC
+      AvailabilityZone: !Select [0, !GetAZs '']
+      MapPublicIpOnLaunch: true
+  ServerSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Allow http to client host
+      VpcId: 
+        Ref: myVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+  EC2Server:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      # SecurityGroups: 
+      #   - !Ref ServerSecurityGroup
+      SecurityGroupIds:
+        - !GetAtt [ServerSecurityGroup, GroupId]
+      SubnetId: !Ref PublicSubnet
+      KeyName: section3key
+      ImageId: 'ami-09d56f8956ab235b3'
+      InstanceType: t2.micro

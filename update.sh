@@ -1,0 +1,1 @@
+aws cloudformation update-stack --stack-name serverstack --template-body file://server.yml --parameters file://serverParams.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM"

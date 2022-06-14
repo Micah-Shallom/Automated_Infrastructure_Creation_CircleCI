@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "cloudformation://schema/cloudformation": "file:///c%3A/Users/micah/Documents/WorkSpaces/DevOpsProjects/Udacity/Automated_Infrastructure_Creation_CircleCI/server.yml"
+    }
+}
