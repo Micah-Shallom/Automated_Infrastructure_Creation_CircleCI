@@ -34,8 +34,8 @@ jobs:
             apk add --update ansible
       - run:
           name: Configure Server
-          command: |
-            ansible-playbook -i inventory main.yml
+          command: | 
+            ansible-playbook main.yml -i inventory.txt 
           # expect:
           #   command: ansible-playbook -i inventory.txt main.yml
           #   responses:
