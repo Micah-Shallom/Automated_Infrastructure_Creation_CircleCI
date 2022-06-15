@@ -1,5 +1,5 @@
 ---
-
+#new
 - name: Main playbook for automatated setup of a webserver on EC2
 
   hosts: ubuntu
