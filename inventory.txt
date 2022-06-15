@@ -1,6 +1,0 @@
-[ubuntu]
-54.173.209.211
-
-# added the public ip of the ubuntu instance to all possible hostnames just incase
-[all]
-54.173.209.211
