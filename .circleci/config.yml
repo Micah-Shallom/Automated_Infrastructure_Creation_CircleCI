@@ -37,7 +37,7 @@ jobs:
           expect:
             command: ansible-playbook -i inventory.txt main.yml
             responses:
-              'First Question in the prompt' : 'yes'
+              'FAre you sure you want to continue connecting (yes/no)?' : 'yes'
 
 
 workflows:
