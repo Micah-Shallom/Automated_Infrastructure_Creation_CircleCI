@@ -5,6 +5,7 @@ orbs:
 
 #job that spins up the creation of infrastructures with cloudformaation
 jobs: 
+  #Infrastructure Creation
   create_infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -19,6 +20,7 @@ jobs:
             --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
             --region us-east-1
   
+  #Configuration and Deployment
   configure_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
