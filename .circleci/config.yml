@@ -35,7 +35,7 @@ jobs:
       - run:
           name: Configure Server
           command: | 
-            ansible-playbook main.yml -i ../inventory.txt 
+            ansible-playbook -i inventory.txt main.yml  
           # expect:
           #   command: ansible-playbook -i inventory.txt main.yml
           #   responses:
