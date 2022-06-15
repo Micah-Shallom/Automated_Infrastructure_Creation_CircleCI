@@ -34,6 +34,10 @@ jobs:
           name: Configure Server
           command: |
             ansible-playbook -i inventory.txt main.yml
+          expect:
+            command: ansible-playbook -i inventory.txt main.yml
+            responses:
+              'First Question in the prompt' : 'yes'
 
 
 workflows:
