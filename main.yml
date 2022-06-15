@@ -1,0 +1,11 @@
+---
+
+- name: Main playbook for automatated setup of a webserver on EC2
+
+  hosts: ubuntu
+  user: ubuntu
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - setup
