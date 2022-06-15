@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
 
-#job that spins up the creation of infrastructures with cloudformaation
+#job that spins up the creation of infrastructures with cloudformation
 jobs: 
   #Infrastructure Creation
   create_infrastructure:
