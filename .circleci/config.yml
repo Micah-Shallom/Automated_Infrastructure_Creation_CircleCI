@@ -8,6 +8,10 @@ commands:
   destroy_environment:
     steps:
       - run:
+          name: Installing aws cli
+          command: |
+            sudo apt-get aws-cli   
+      - run:
           name: Destroy environment
           when: on_fail
           command: |
@@ -49,17 +53,14 @@ jobs:
   # Smoke Testing
   smoke_test:
       docker:
-        # - image: alpine:latest
-        - image: cimg/base:2022.06
+        - image: alpine:latest
+        # - image: cimg/base:2022.06
       steps:
         - checkout
         - run:
             name: smoke test
             command: return 1  
-        - run:
-            name: Installing aws cli
-            command: |
-              sudo apt-get aws-cli               
+                    
         - destroy_environment  
              
 # Invoke jobs via workflows
