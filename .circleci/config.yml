@@ -41,9 +41,26 @@ jobs:
           #   responses:
           #     'Are you sure you want to continue connecting (yes/no)?' : 'yes'
 
+    # smoke testing configured application
+    smoke_test:
+      docker:
+        - image: alpine:latest
+      steps:
+        - run: apk add --update curl
+        - run:
+            name: smoke test
+            command: |
+              URL="https://blog.udacity.com/"
+              if curl -s --head ${URL}
+              then
+                return 0
+              else
+                return 0
+              fi
 
 workflows:
   my_workflow:
     jobs:
       # - create_infrastructure
-      - configure_infrastructure
+      # - configure_infrastructure
+      - smoke_test
