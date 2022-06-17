@@ -3,6 +3,15 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
 
+commands:
+  destroy_environment:
+    steps:
+      - run:
+          name: Destroy Environment
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+
 #job that spins up the creation of infrastructures with cloudformation
 jobs: 
   #Infrastructure Creation
@@ -51,14 +60,7 @@ jobs:
             command: return 0
         - destroy_environment
       
-    # rollback on infrastructure build
-    destroy_environment:
-      steps:
-        - run:
-            name: Destroy Environment
-            when: on_fail
-            command: |
-              aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+    
 
 workflows:
   my_workflow:
